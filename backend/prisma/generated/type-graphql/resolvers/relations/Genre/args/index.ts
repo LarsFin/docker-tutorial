@@ -1,0 +1,1 @@
+export { GenreGamesArgs } from "./GenreGamesArgs";

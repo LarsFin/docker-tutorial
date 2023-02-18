@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2018",
+    "sourceMap": true,
+    "outDir": "build",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "lib": ["es2018", "esnext.asynciterable"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src"]
+}
