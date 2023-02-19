@@ -12,4 +12,9 @@ export class GameUpdateManyMutationInput {
     nullable: true
   })
   slug?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  coverUrl?: StringFieldUpdateOperationsInput | undefined;
 }

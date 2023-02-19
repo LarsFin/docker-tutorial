@@ -16,4 +16,9 @@ export class GameCreateManyPublisherInput {
     nullable: false
   })
   slug!: string;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  coverUrl?: string | undefined;
 }

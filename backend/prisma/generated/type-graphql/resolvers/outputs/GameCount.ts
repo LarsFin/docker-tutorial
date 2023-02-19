@@ -11,4 +11,9 @@ export class GameCount {
     nullable: false
   })
   genres!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
+  platforms!: number;
 }

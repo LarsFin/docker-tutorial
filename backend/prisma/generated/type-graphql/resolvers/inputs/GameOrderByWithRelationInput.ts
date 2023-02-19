@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { GenreOrderByRelationAggregateInput } from "../inputs/GenreOrderByRelationAggregateInput";
+import { PlatformOrderByRelationAggregateInput } from "../inputs/PlatformOrderByRelationAggregateInput";
 import { PublisherOrderByWithRelationInput } from "../inputs/PublisherOrderByWithRelationInput";
 import { SortOrder } from "../../enums/SortOrder";
 
@@ -20,6 +21,11 @@ export class GameOrderByWithRelationInput {
   })
   slug?: "asc" | "desc" | undefined;
 
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  coverUrl?: "asc" | "desc" | undefined;
+
   @TypeGraphQL.Field(_type => PublisherOrderByWithRelationInput, {
     nullable: true
   })
@@ -34,4 +40,9 @@ export class GameOrderByWithRelationInput {
     nullable: true
   })
   genres?: GenreOrderByRelationAggregateInput | undefined;
+
+  @TypeGraphQL.Field(_type => PlatformOrderByRelationAggregateInput, {
+    nullable: true
+  })
+  platforms?: PlatformOrderByRelationAggregateInput | undefined;
 }

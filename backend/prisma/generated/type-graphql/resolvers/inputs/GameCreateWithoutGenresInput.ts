@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { PlatformCreateNestedManyWithoutGamesInput } from "../inputs/PlatformCreateNestedManyWithoutGamesInput";
 import { PublisherCreateNestedOneWithoutGamesInput } from "../inputs/PublisherCreateNestedOneWithoutGamesInput";
 
 @TypeGraphQL.InputType("GameCreateWithoutGenresInput", {
@@ -13,8 +14,18 @@ export class GameCreateWithoutGenresInput {
   })
   slug!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  coverUrl?: string | undefined;
+
   @TypeGraphQL.Field(_type => PublisherCreateNestedOneWithoutGamesInput, {
     nullable: true
   })
   publisher?: PublisherCreateNestedOneWithoutGamesInput | undefined;
+
+  @TypeGraphQL.Field(_type => PlatformCreateNestedManyWithoutGamesInput, {
+    nullable: true
+  })
+  platforms?: PlatformCreateNestedManyWithoutGamesInput | undefined;
 }

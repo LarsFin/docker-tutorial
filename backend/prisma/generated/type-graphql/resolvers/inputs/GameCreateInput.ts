@@ -3,6 +3,7 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { GenreCreateNestedManyWithoutGamesInput } from "../inputs/GenreCreateNestedManyWithoutGamesInput";
+import { PlatformCreateNestedManyWithoutGamesInput } from "../inputs/PlatformCreateNestedManyWithoutGamesInput";
 import { PublisherCreateNestedOneWithoutGamesInput } from "../inputs/PublisherCreateNestedOneWithoutGamesInput";
 
 @TypeGraphQL.InputType("GameCreateInput", {
@@ -14,6 +15,11 @@ export class GameCreateInput {
   })
   slug!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  coverUrl?: string | undefined;
+
   @TypeGraphQL.Field(_type => PublisherCreateNestedOneWithoutGamesInput, {
     nullable: true
   })
@@ -23,4 +29,9 @@ export class GameCreateInput {
     nullable: true
   })
   genres?: GenreCreateNestedManyWithoutGamesInput | undefined;
+
+  @TypeGraphQL.Field(_type => PlatformCreateNestedManyWithoutGamesInput, {
+    nullable: true
+  })
+  platforms?: PlatformCreateNestedManyWithoutGamesInput | undefined;
 }

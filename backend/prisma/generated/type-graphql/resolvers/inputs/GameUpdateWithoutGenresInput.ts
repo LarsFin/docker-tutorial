@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { PlatformUpdateManyWithoutGamesNestedInput } from "../inputs/PlatformUpdateManyWithoutGamesNestedInput";
 import { PublisherUpdateOneWithoutGamesNestedInput } from "../inputs/PublisherUpdateOneWithoutGamesNestedInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
@@ -14,8 +15,18 @@ export class GameUpdateWithoutGenresInput {
   })
   slug?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  coverUrl?: StringFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => PublisherUpdateOneWithoutGamesNestedInput, {
     nullable: true
   })
   publisher?: PublisherUpdateOneWithoutGamesNestedInput | undefined;
+
+  @TypeGraphQL.Field(_type => PlatformUpdateManyWithoutGamesNestedInput, {
+    nullable: true
+  })
+  platforms?: PlatformUpdateManyWithoutGamesNestedInput | undefined;
 }

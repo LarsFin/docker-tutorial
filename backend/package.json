@@ -4,14 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node build/src/main/index.js",
-    "start:watch": "nodemon --watch build/src/main build/src/main/web/index.js",
+    "start": "node build/src/index.js",
     "build": "tsc",
-    "test": "tsc && nyc mocha",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
     "clean": "rm -rf ./build",
-    "prisma:migrate": "prisma migrate reset -f --skip-generate",
+    "prisma:migrate": "prisma migrate dev",
     "prisma:generate": "prisma generate"
   },
   "dependencies": {

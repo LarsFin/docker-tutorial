@@ -25,25 +25,24 @@ model Genre {
   games   Game[]
 }
 
+model Platform {
+  id    Int     @id @default(autoincrement())
+  slug  String
+
+  games Game[]
+}
+
 model Game {
   id          Int         @id @default(autoincrement())
   slug        String
+  coverUrl    String      @default("")
 
   publisher   Publisher?  @relation(fields: [publisherId], references: [id])
   publisherId Int?
 
   genres      Genre[]
+  platforms   Platform[]
 }
-
-// model GenresOnGames {
-//   genre   Genre  @relation(fields: [genreId], references: [id])
-//   genreId Int
-
-//   game    Game   @relation(fields: [gameId], references: [id])
-//   gameId  Int
-
-//   @@id([genreId, gameId])
-// }
 
 model Publisher {
   id    Int     @id @default(autoincrement())

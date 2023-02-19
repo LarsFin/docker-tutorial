@@ -4,7 +4,7 @@ import { loadConfig } from "./config";
 import { Logger } from "tslog";
 import { buildSchema } from "type-graphql";
 import { graphqlHTTP } from "express-graphql";
-import { resolvers } from "../../prisma/generated/type-graphql";
+import { resolvers } from "../prisma/generated/type-graphql";
 import { PrismaClient } from "@prisma/client";
 
 const app = express();
