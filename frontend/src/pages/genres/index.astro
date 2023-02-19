@@ -1,0 +1,32 @@
+---
+import Tag from "../../components/Tag.astro";
+import Layout from "../../layouts/Layout.astro";
+
+// TODO: obviously improve with env vars and encapsulation
+const genresResponse = await fetch("http://localhost:4040/graphql", {
+  method: "POST",
+  headers: {
+    'Content-Type':'application/json'
+  },
+  body: JSON.stringify({
+    query: `
+      query {
+        genres {
+          slug
+        }
+      }
+    `
+  })
+});
+
+const genresJson = await genresResponse.json();
+const genres = genresJson.data?.genres as any[];
+
+---
+
+<Layout title="Gamebox - Genres">
+  <main>
+    <h1>Genres</h1>
+    {genres.map(genre => <Tag slug={genre.slug}/>)}
+  </main>
+</Layout>

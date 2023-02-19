@@ -1,0 +1,30 @@
+---
+import { slugToName } from "../utils/slugToName";
+
+export interface Tag {
+  slug: string
+}
+
+const { slug } = Astro.props;
+---
+
+<span class="tag">
+  <b> {slugToName(slug)} </b>
+</span>
+<style>
+  .tag {
+    color: whitesmoke;
+    background-color: maroon;
+    font-family: sans-serif;
+    font-size: 1rem;
+
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+
+    border-radius: 1rem;
+
+    margin: 0.2rem
+  }
+</style>
