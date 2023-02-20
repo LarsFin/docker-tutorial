@@ -35,11 +35,6 @@ export class GameScalarWhereInput {
   })
   slug?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
-    nullable: true
-  })
-  coverUrl?: StringFilter | undefined;
-
   @TypeGraphQL.Field(_type => IntNullableFilter, {
     nullable: true
   })

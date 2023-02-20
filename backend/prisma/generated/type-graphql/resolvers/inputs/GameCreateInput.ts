@@ -15,11 +15,6 @@ export class GameCreateInput {
   })
   slug!: string;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: true
-  })
-  coverUrl?: string | undefined;
-
   @TypeGraphQL.Field(_type => PublisherCreateNestedOneWithoutGamesInput, {
     nullable: true
   })

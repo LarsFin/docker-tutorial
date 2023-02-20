@@ -21,10 +21,5 @@ export class GameMinOrderByAggregateInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  coverUrl?: "asc" | "desc" | undefined;
-
-  @TypeGraphQL.Field(_type => SortOrder, {
-    nullable: true
-  })
   publisherId?: "asc" | "desc" | undefined;
 }

@@ -20,11 +20,6 @@ export class GameCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
-  coverUrl!: number;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: false
-  })
   publisherId!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

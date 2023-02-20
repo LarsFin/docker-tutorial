@@ -21,11 +21,6 @@ export class Game {
   })
   slug!: string;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: false
-  })
-  coverUrl!: string;
-
   publisher?: Publisher | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

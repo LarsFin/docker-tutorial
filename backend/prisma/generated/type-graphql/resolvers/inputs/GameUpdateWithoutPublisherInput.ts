@@ -15,11 +15,6 @@ export class GameUpdateWithoutPublisherInput {
   })
   slug?: StringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true
-  })
-  coverUrl?: StringFieldUpdateOperationsInput | undefined;
-
   @TypeGraphQL.Field(_type => GenreUpdateManyWithoutGamesNestedInput, {
     nullable: true
   })

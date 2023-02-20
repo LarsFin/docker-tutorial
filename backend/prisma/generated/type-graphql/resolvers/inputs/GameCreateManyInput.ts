@@ -17,11 +17,6 @@ export class GameCreateManyInput {
   })
   slug!: string;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: true
-  })
-  coverUrl?: string | undefined;
-
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true
   })
