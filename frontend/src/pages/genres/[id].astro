@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { graphql } from "../../utils/graphql";
+import { slugToName } from "../../utils/slugToName";
+
+export const getStaticPaths = async () => {
+  const genresResponse = await graphql<{
+    genres: {
+      id: number;
+      slug: string;
+    }[]
+  }>(
+    `
+    query {
+      genres {
+        id
+        slug
+      }
+    }
+    `
+  );
+  
+  if (genresResponse === null) {
+    return [];
+  }
+
+  return genresResponse.genres.map(genre => ({
+    params: { id: genre.id },
+    props: { ...genre }
+  }))
+}
+
+const { id } = Astro.params;
+const { slug } = Astro.props;
+
+if (id === undefined) {
+  return Astro.redirect('/404');
+}
+
+---
+
+<Layout title={`Gamebox - Genres - ${slugToName(slug)}`}>
+  <h2>{slugToName(slug)}</h2>
+</Layout>
