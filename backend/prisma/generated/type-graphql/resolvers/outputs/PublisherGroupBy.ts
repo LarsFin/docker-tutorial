@@ -22,6 +22,11 @@ export class PublisherGroupBy {
   })
   slug!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  imgSrc!: string;
+
   @TypeGraphQL.Field(_type => PublisherCountAggregate, {
     nullable: true
   })

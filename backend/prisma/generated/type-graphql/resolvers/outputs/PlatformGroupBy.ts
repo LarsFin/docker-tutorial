@@ -22,6 +22,11 @@ export class PlatformGroupBy {
   })
   slug!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  imgSrc!: string;
+
   @TypeGraphQL.Field(_type => PlatformCountAggregate, {
     nullable: true
   })

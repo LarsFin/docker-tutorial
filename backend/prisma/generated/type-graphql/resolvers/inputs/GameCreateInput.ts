@@ -15,6 +15,11 @@ export class GameCreateInput {
   })
   slug!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  imgSrc?: string | undefined;
+
   @TypeGraphQL.Field(_type => PublisherCreateNestedOneWithoutGamesInput, {
     nullable: true
   })

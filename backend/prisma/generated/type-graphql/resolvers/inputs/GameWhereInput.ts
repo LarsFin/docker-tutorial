@@ -38,6 +38,11 @@ export class GameWhereInput {
   })
   slug?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  imgSrc?: StringFilter | undefined;
+
   @TypeGraphQL.Field(_type => PublisherRelationFilter, {
     nullable: true
   })

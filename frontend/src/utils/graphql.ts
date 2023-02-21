@@ -1,7 +1,5 @@
-import type { Result } from "./result";
-
 // would be nice if this could reflectively form graphql query based on desired response structure
-export const graphql = async <T>(query: string): Promise<Result<T>> => {
+export const graphql = async <T>(query: string): Promise<T | null> => {
   const response = await fetch(`${import.meta.env.BACKEND_URL}/graphql`, {
     method: "POST",
     headers: {
@@ -15,12 +13,14 @@ export const graphql = async <T>(query: string): Promise<Result<T>> => {
   const jsonResponse = await response.json();
 
   if (!response.ok) {
-    return [null, jsonResponse];
+    console.error(jsonResponse);
+    return null;
   }
 
   if (jsonResponse.errors != undefined) {
-    return [null, jsonResponse.errors];
+    console.error(jsonResponse.errors);
+    return null;
   }
 
-  return [jsonResponse.data as T, null];
+  return jsonResponse.data as T;
 };

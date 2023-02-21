@@ -35,5 +35,5 @@ export class GenreGamesArgs {
   @TypeGraphQL.Field(_type => [GameScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "slug" | "publisherId"> | undefined;
+  distinct?: Array<"id" | "slug" | "imgSrc" | "publisherId"> | undefined;
 }

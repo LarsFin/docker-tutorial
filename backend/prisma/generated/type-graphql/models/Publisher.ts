@@ -19,6 +19,11 @@ export class Publisher {
   })
   slug!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  imgSrc!: string;
+
   games?: Game[];
 
   @TypeGraphQL.Field(_type => PublisherCount, {

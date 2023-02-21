@@ -33,4 +33,9 @@ export class GenreScalarWhereWithAggregatesInput {
     nullable: true
   })
   slug?: StringWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
+    nullable: true
+  })
+  imgSrc?: StringWithAggregatesFilter | undefined;
 }

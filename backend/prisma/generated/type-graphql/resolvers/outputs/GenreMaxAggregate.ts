@@ -16,4 +16,9 @@ export class GenreMaxAggregate {
     nullable: true
   })
   slug!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  imgSrc!: string | null;
 }

@@ -35,6 +35,11 @@ export class GenreWhereInput {
   })
   slug?: StringFilter | undefined;
 
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true
+  })
+  imgSrc?: StringFilter | undefined;
+
   @TypeGraphQL.Field(_type => GameListRelationFilter, {
     nullable: true
   })

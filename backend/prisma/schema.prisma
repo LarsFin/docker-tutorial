@@ -21,6 +21,7 @@ generator typegraphql {
 model Genre {
   id      Int     @id @default(autoincrement())
   slug    String
+  imgSrc  String  @default("")
 
   games   Game[]
 }
@@ -28,6 +29,7 @@ model Genre {
 model Platform {
   id    Int     @id @default(autoincrement())
   slug  String
+  imgSrc  String  @default("")
 
   games Game[]
 }
@@ -35,6 +37,7 @@ model Platform {
 model Game {
   id          Int         @id @default(autoincrement())
   slug        String
+  imgSrc  String  @default("")
 
   publisher   Publisher?  @relation(fields: [publisherId], references: [id])
   publisherId Int?
@@ -46,6 +49,7 @@ model Game {
 model Publisher {
   id    Int     @id @default(autoincrement())
   slug  String
+  imgSrc  String  @default("")
 
   games Game[]
 }

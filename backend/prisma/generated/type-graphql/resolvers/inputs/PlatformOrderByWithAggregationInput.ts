@@ -23,6 +23,11 @@ export class PlatformOrderByWithAggregationInput {
   })
   slug?: "asc" | "desc" | undefined;
 
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  imgSrc?: "asc" | "desc" | undefined;
+
   @TypeGraphQL.Field(_type => PlatformCountOrderByAggregateInput, {
     nullable: true
   })

@@ -17,4 +17,9 @@ export class GenreCountOrderByAggregateInput {
     nullable: true
   })
   slug?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  imgSrc?: "asc" | "desc" | undefined;
 }

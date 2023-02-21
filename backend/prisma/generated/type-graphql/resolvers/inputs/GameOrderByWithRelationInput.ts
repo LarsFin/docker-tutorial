@@ -21,6 +21,11 @@ export class GameOrderByWithRelationInput {
   })
   slug?: "asc" | "desc" | undefined;
 
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  imgSrc?: "asc" | "desc" | undefined;
+
   @TypeGraphQL.Field(_type => PublisherOrderByWithRelationInput, {
     nullable: true
   })

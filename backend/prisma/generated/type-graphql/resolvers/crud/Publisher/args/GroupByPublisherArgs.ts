@@ -20,7 +20,7 @@ export class GroupByPublisherArgs {
   @TypeGraphQL.Field(_type => [PublisherScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"id" | "slug">;
+  by!: Array<"id" | "slug" | "imgSrc">;
 
   @TypeGraphQL.Field(_type => PublisherScalarWhereWithAggregatesInput, {
     nullable: true

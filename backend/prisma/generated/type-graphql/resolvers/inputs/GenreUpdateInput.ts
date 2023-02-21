@@ -14,6 +14,11 @@ export class GenreUpdateInput {
   })
   slug?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  imgSrc?: StringFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => GameUpdateManyWithoutGenresNestedInput, {
     nullable: true
   })

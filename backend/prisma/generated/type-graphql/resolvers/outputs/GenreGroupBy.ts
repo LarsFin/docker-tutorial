@@ -22,6 +22,11 @@ export class GenreGroupBy {
   })
   slug!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false
+  })
+  imgSrc!: string;
+
   @TypeGraphQL.Field(_type => GenreCountAggregate, {
     nullable: true
   })

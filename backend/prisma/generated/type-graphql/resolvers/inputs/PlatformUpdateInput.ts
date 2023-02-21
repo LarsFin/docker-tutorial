@@ -14,6 +14,11 @@ export class PlatformUpdateInput {
   })
   slug?: StringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  imgSrc?: StringFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => GameUpdateManyWithoutPlatformsNestedInput, {
     nullable: true
   })

@@ -35,5 +35,5 @@ export class FindManyPublisherArgs {
   @TypeGraphQL.Field(_type => [PublisherScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "slug"> | undefined;
+  distinct?: Array<"id" | "slug" | "imgSrc"> | undefined;
 }

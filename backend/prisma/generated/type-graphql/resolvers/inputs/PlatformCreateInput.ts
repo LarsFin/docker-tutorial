@@ -13,6 +13,11 @@ export class PlatformCreateInput {
   })
   slug!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  imgSrc?: string | undefined;
+
   @TypeGraphQL.Field(_type => GameCreateNestedManyWithoutPlatformsInput, {
     nullable: true
   })

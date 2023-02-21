@@ -1,29 +1,46 @@
 ---
-import Tag from "../../components/Tag.astro";
+import ImageCard from "../../components/ImageCard.astro";
 import Layout from "../../layouts/Layout.astro";
 import { graphql } from "../../utils/graphql";
 
-const [genresResponse, err] = await graphql<{
+const genresResponse = await graphql<{
   genres: {
+    id: number;
     slug: string;
+    imgSrc: string;
   }[]
 }>(`
   query {
     genres {
+      id
       slug
+      imgSrc
     }
   }
 `);
-
-if (err !== null) {
-  console.warn(err);
-}
 
 ---
 
 <Layout title="Gamebox - Genres">
   <main>
     <h1>Genres</h1>
-    {genresResponse?.genres.map(genre => <Tag slug={genre.slug}/>)}
+    <ul role="list" class="link-card-grid">
+      {genresResponse?.genres
+        .sort((a, b) => a.slug > b.slug ? 1 : -1)
+        .map(genre => <ImageCard 
+          title={genre.slug}
+          href={`/genres/${genre.id}`}
+          image={genre.imgSrc}
+        />)}
+    </ul>
   </main>
 </Layout>
+
+<style>
+  .link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 1rem;
+		padding: 0;
+	}
+</style>
