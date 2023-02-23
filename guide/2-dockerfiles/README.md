@@ -16,9 +16,6 @@ You should now see `docker_demo` in your listed docker images.
 Next, we'll run the image:
 ```console
 docker run --name demo-app docker_demo:latest
-yarn run v1.22.19
-$ node build/src/index.js
-2023-02-23 08:02:09.606	INFO	/build/src/index.js:35	Backend API started on port 4040
 ```
 
 Sweet, we can see our application has started on port 4040. Let's open another terminal and try access it:
@@ -33,8 +30,6 @@ No luck!
 When listing our containers, we can see that no ports are given:
 ```
 docker ps
-CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS     NAMES
-7f3cba67c84f   docker_demo:latest   "dumb-init yarn start"   4 seconds ago   Up 3 seconds             demo-app
 ```
 
 Let's use `-p` to bind our local ports with the container:
@@ -71,17 +66,6 @@ Let's start our postgres container again:
 docker run --name pg-docker -e POSTGRES_PASSWORD=pass123 -e POSTGRES_USER=docker_user -e POSTGRES_DB=docker_demo -d postgres:15-alpine
 ```
 
-We'll also have to make sure we have the correct `DATABASE_URL` environment variable in our demo application.
-First, stop the app container:
-```
-docker stop demo-app
-```
-
-Afterwards run a new container with the env var passed correctly:
-```console
-docker run --name demo-app -d -p 4040:4040 -e DATABASE_URL="postgres://docker_user:pass123@pg-docker/docker_demo" docker_demo:latest
-```
-
 We should have two docker containers running now, one for our demo application and the other for our database:
 ```console
 docker ps
@@ -100,7 +84,6 @@ docker exec -it demo-app sh
 Now a simple check as to whether two containers can talk to eachother is using `ping`
 ```console
 ping pg-docker
-ping: bad address 'pg-docker'
 ```
 
 If two containers can communicate with one another via docker networking you can use the container names in place of their DNS name or IP.
@@ -117,7 +100,7 @@ docker network ls
 
 We can inspect the Docker network:
 ```console
-docker network inspect demo_net
+docker inspect demo_net
 ```
 
 We can see that the `Containers` blob is empty.
@@ -138,9 +121,6 @@ docker exec -it demo-app sh
 We can now successfully communicate between the containers!
 ```console
 ping pg-docker
-PING pg-docker (172.19.0.3): 56 data bytes
-64 bytes from 172.19.0.3: seq=0 ttl=64 time=0.462 ms
-64 bytes from 172.19.0.3: seq=1 ttl=64 time=0.338 ms
 ```
 
 While we're here let's perform the migration:

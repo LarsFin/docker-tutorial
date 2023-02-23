@@ -13,18 +13,23 @@ RUN apk add dumb-init
 
 # <--- Layer Created
 
-# install node module dependencies
-RUN yarn
-
-# <--- Layer Created
-
 # copy files from local to image
 COPY . .
 
 # <--- Layer Created
 
+# set environment file
+RUN mv .docker.env .env
+
+# <--- Layer Created
+
+# install node module dependencies
+RUN yarn
+
+# <--- Layer Created
+
 # transpile ts to executable js
-RUN yarn build
+RUN yarn prisma:generate && yarn build
 
 # <--- Layer Created
 

@@ -27,30 +27,17 @@ docker pull node:18-alpine
 Once completed, we can list our local images and see that it's there. You may see a different docker image at the top of your list, this is because images are listed by their created date not when they were pulled down.
 ```console
 docker images
-REPOSITORY                                      TAG                IMAGE ID       CREATED             SIZE
-node                                            18-alpine          ad0efe67fff2   About an hour ago   173MB
 ```
 
 Great, so we have the image locally, let's run some simple JavaScript from inside the container.
 ```console
 docker run node:18-alpine -e "console.log(process.env)"
-{
-  NODE_VERSION: '18.14.2',
-  HOSTNAME: '5add74f384d5',
-  YARN_VERSION: '1.22.19',
-  SHLVL: '1',
-  HOME: '/root',
-  PATH: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-  PWD: '/'
-}
 ```
 *You could alternatively choose to run the image via its Image ID listed from the step above*
 
 If you now list **all** your containers, you should see your node container which has successfully exited;
-```
+```console
 docker ps -a
-CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS                      PORTS     NAMES
-5add74f384d5   node:18-alpine   "docker-entrypoint.s…"   31 seconds ago   Exited (0) 30 seconds ago             nostalgic_volhard
 ```
 *`-a` is used to ensure we list all containers, without it we only list those which are currently running. Alternatively, we can use the command: `docker container ls -a` instead which is perhaps more familiar*
 
@@ -95,7 +82,13 @@ Let's run the database:
 docker run --name pg-docker -e POSTGRES_PASSWORD=pass123 -e POSTGRES_USER=docker_user -e POSTGRES_DB=docker_demo postgres:15-alpine
 ```
 
-It works! Let's run it in the background though, first close existing process (ctrl + c in terminal window). Then run the image with the `-d` flat for detached mode.
+It works! Let's run it in the background though, first close existing process (ctrl + c in terminal window).
+Let's remove the container so we can free the name:
+```console
+docker rm pg-docker
+```
+
+Afterwards, run the image with the `-d` flat for detached mode.
 ```console
 docker run --name pg-docker -e POSTGRES_PASSWORD=pass123 -e POSTGRES_USER=docker_user -e POSTGRES_DB=docker_demo -d postgres:15-alpine
 ```
@@ -126,12 +119,6 @@ INSERT INTO people (name) VALUES ('tess'), ('roy'), ('charlie');
 View the records in the table:
 ```sql
 SELECT * FROM people;
- id |  name   
-----+---------
-  1 | tess
-  2 | roy
-  3 | charlie
-(3 rows)
 ```
 
 Where is this data actually written?
@@ -166,18 +153,15 @@ docker run --name pg-docker -e POSTGRES_PASSWORD=pass123 -e POSTGRES_USER=docker
 In an interactive session we can see that our data doesn't exist:
 ```console
 docker exec -it pg-docker psql -U docker_user -d docker_demo
-
-docker_demo=# \dt
-Did not find any relations.
 ```
 
 That's no good, let's take down the new container again:
-```
+```console
 docker stop pg-docker && docker rm pg-docker
 ```
 
 Now we're going to use the original volume with our data to start the postgres container:
-```
+```console
 docker run --name pg-docker -e POSTGRES_PASSWORD=pass123 -e POSTGRES_USER=docker_user -e POSTGRES_DB=docker_demo -d -v <your-docker-volume-name>:/var/lib/postgresql/data  postgres:15-alpine
 ```
 *Unfortunately it's not possible to rename a docker volume, this is due the NAME being used to determine the local pathing to the data source ~ NAMES in Docker are actually more akin to ids. See this 2017 [issue](https://github.com/moby/moby/issues/31154) on this use case*
@@ -185,16 +169,9 @@ docker run --name pg-docker -e POSTGRES_PASSWORD=pass123 -e POSTGRES_USER=docker
 Creating an interactive session again, we can see that our original data is there!
 ```console
 docker exec -it pg-docker psql -U docker_user -d docker_demo
-
-docker_demo=# \dt
-           List of relations
- Schema |  Name  | Type  |    Owner    
---------+--------+-------+-------------
- public | people | table | docker_user
-(1 row)
 ```
 
 Typically, it's best to create your volume first where we can give a more descriptive and user-friendly name:
-```
+```console
 docker volume create my_data
 ```
